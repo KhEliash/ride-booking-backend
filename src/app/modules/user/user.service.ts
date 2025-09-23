@@ -15,9 +15,7 @@ const getAllUsers = async () => {
 
   return users;
 };
-
-
-
+// a
 export const UserService = {
   createUser,
   getAllUsers,
