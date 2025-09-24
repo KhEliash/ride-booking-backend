@@ -7,7 +7,7 @@ export enum Role {
 export interface IUser {
   name: string;
   email: string;
-  password?: string;
+  password: string;
   role: Role;
   phone: string;
   isApproved?: boolean;
