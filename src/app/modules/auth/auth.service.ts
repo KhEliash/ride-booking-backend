@@ -28,7 +28,7 @@ const credentialLogin = async (payload: Partial<IUser>) => {
   };
 
   const accessToken = jwt.sign(jwtPayload, envVars.JWT_ACCESS_SECRET, {
-    expiresIn: Number(envVars.BCRYPT_SALT_ROUND),
+    expiresIn: envVars.JWT_ACCESS_EXPIRES as string
   });
 
   return {
