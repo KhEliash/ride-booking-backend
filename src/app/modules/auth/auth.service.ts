@@ -2,7 +2,7 @@ import AppError from "../../errorHelpers/AppError";
 import { IUser } from "../user/user.interface";
 import httpStatus from "http-status-codes";
 import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken";
+import jwt, { SignOptions } from "jsonwebtoken";
 import { User } from "../user/user.model";
 import { envVars } from "../../config/env";
 
@@ -28,8 +28,8 @@ const credentialLogin = async (payload: Partial<IUser>) => {
   };
 
   const accessToken = jwt.sign(jwtPayload, envVars.JWT_ACCESS_SECRET, {
-    expiresIn: envVars.JWT_ACCESS_EXPIRES as string
-  });
+    expiresIn: envVars.JWT_ACCESS_EXPIRES,
+  } as SignOptions);
 
   return {
     accessToken,
