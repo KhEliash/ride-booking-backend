@@ -13,15 +13,5 @@ export interface IUser {
   isApproved?: boolean;
   isActive?: boolean;
   isBlocked?: boolean;
-  // driverInfo?: {
-  //   vehicleType: string;
-  //   vehicleNumber: string;
-  //   licenseNumber: string;
-  //   isApproved: boolean;
-  //   isOnline: boolean;
-  //   currentLocation?: {
-  //     type: string;
-  //     coordinates: [number, number];
-  //   };
-  // };
+ 
 }
