@@ -13,5 +13,8 @@ export interface IUser {
   isApproved?: boolean;
   isActive?: boolean;
   isBlocked?: boolean;
- 
+  vehicleInfo?: {
+    model: string;
+    licensePlate: string;
+  };
 }

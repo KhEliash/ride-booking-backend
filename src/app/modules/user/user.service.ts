@@ -4,13 +4,31 @@ import { User } from "./user.model";
 import httpStatus from "http-status-codes";
 import bcryptjs from "bcryptjs";
 import { envVars } from "../../config/env";
+import { Driver } from "../driver/driver.model";
 
-const createUser = async (payload: Partial<IUser>) => {
-  const { email, password, ...rest } = payload;
+const createUser = async (payload: IUser) => {
+  const { email, password, role, vehicleInfo, ...rest } = payload;
+
   const isUserExist = await User.findOne({ email });
-
   if (isUserExist) {
-    throw new AppError(httpStatus.BAD_REQUEST, "User Already Exist");
+    throw new AppError(httpStatus.BAD_REQUEST, "User Already Exists");
+  }
+
+  const existingDriver = await Driver.findOne({ email });
+  if (existingDriver) {
+    throw new AppError(
+      httpStatus.BAD_REQUEST,
+      "Driver with this email already exists"
+    );
+  }
+
+  if (role === "driver") {
+    if (!vehicleInfo || !vehicleInfo.model || !vehicleInfo.licensePlate) {
+      throw new AppError(
+        httpStatus.BAD_REQUEST,
+        "Vehicle information is required for drivers"
+      );
+    }
   }
 
   const hashedPassword = await bcryptjs.hash(
@@ -18,11 +36,22 @@ const createUser = async (payload: Partial<IUser>) => {
     Number(envVars.BCRYPT_SALT_ROUND)
   );
 
+  // Create user
   const user = await User.create({
     email,
     password: hashedPassword,
+    role,
     ...rest,
   });
+
+  // If the user is a driver
+  if (role === "driver") {
+    await Driver.create({
+      userId: user._id,
+      vehicleInfo,
+    });
+  }
+
   return user;
 };
 

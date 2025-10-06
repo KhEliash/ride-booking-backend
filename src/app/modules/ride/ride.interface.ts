@@ -1,6 +1,8 @@
+import { Types } from "mongoose";
+
 export interface IRide {
   _id?: string;
-  riderId: string;
+  riderId: Types.ObjectId;
   driverId?: string;
   pickupLocation: {
     address: string;
