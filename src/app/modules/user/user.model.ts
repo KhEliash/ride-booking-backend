@@ -21,7 +21,7 @@ const userSchema = new Schema<IUser>(
     },
     phone: { type: String },
     isActive: { type: Boolean, default: true },
-    isApproved: { type: Boolean, default: false },
+    // isApproved: { type: Boolean, default: false },
     isBlocked: { type: Boolean, default: false },
   },
   {

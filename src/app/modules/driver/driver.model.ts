@@ -15,9 +15,14 @@ const DriverSchema = new Schema(
       type: Boolean,
       default: false,
     },
+    isApproved: {
+      type: Boolean,
+      default: false,
+    },
     currentRideId: {
-      type: Schema.Types.ObjectId,
-      ref: "Ride",
+      // type: Schema.Types.ObjectId,
+      // ref: "Ride",
+      type: String,
       default: null,
     },
     earnings: {

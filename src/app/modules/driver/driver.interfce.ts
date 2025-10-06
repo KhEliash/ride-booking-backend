@@ -8,6 +8,7 @@ export interface IDriver extends IUser {
     licensePlate: string;
   };
   isOnline?: boolean;
+  isApproved?: boolean;
   currentRideId?: string;
   earnings?: number;
 }

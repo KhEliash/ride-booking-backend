@@ -10,7 +10,7 @@ export interface IUser {
   password: string;
   role: Role;
   phone: string;
-  isApproved?: boolean;
+  // isApproved?: boolean;
   isActive?: boolean;
   isBlocked?: boolean;
   vehicleInfo?: {
