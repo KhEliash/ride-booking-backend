@@ -1,4 +1,4 @@
-import { Schema } from "mongoose";
+import { model, Schema } from "mongoose";
 import { IRide } from "./ride.interface";
 
 export const rideSchema = new Schema<IRide>(
@@ -41,3 +41,6 @@ export const rideSchema = new Schema<IRide>(
   },
   { timestamps: true }
 );
+
+export const Ride = model<IRide>("Ride", rideSchema);
+
