@@ -62,10 +62,66 @@ const cancelRide = catchAsync(
     });
   }
 );
+const getRiderHistory = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const decodeToken = req.user as JwtPayload;
+    const result = await RideService.getRiderHistory( decodeToken.userId);
+
+    sendResponse(res, {
+      statusCode: httpStatus.CREATED,
+      success: true,
+      message: "Ride History Get Successfully",
+      data: result,
+    });
+  }
+);
+const getDriverHistory = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const decodeToken = req.user as JwtPayload;
+    const result = await RideService.getDriverHistory( decodeToken.userId);
+
+    sendResponse(res, {
+      statusCode: httpStatus.CREATED,
+      success: true,
+      message: "Driver History Get Successfully",
+      data: result,
+    });
+  }
+);
+const getAvailableRides = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+     
+    const result = await RideService.getAvailableRides();
+
+    sendResponse(res, {
+      statusCode: httpStatus.CREATED,
+      success: true,
+      message: "Available rides",
+      data: result,
+    });
+  }
+);
+const getAllRides = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+     
+    const result = await RideService.getAllRides();
+
+    sendResponse(res, {
+      statusCode: httpStatus.CREATED,
+      success: true,
+      message: "All rides",
+      data: result,
+    });
+  }
+);
 
 export const RideController = {
   rideCreate,
   acceptRide,
   updateStatus,
   cancelRide,
+  getRiderHistory,
+  getDriverHistory,
+  getAvailableRides,
+  getAllRides
 };

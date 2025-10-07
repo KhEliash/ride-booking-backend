@@ -5,8 +5,12 @@ import { Role } from "../user/user.interface";
 
 const router = Router();
 
+router.get("/all-rides",checkAuth(Role.ADMIN), RideController.getAllRides);
 router.post("/ride-request",checkAuth(Role.RIDER), RideController.rideCreate);
 router.patch("/cancel/:rideId",checkAuth(Role.RIDER), RideController.cancelRide);
+router.get("/rider-history",checkAuth(Role.RIDER), RideController.getRiderHistory);
+router.get("/driver-history",checkAuth(Role.DRIVER), RideController.getDriverHistory);
+router.get("/available-rides",checkAuth(Role.DRIVER), RideController.getAvailableRides);
 router.post("/accept-ride/:rideId", checkAuth(Role.DRIVER),  RideController.acceptRide);
 router.patch("/update-ride-status/:rideId", checkAuth(Role.DRIVER), RideController.updateStatus);
 

@@ -180,9 +180,38 @@ const cancelRide = async (params: any, driverId: string) => {
   return ride;
 };
 
+const getRiderHistory = async (riderId: string) => {
+  return await Ride.find({ riderId })
+    .populate("driverId", "name vehicleInfo")
+    .sort({ createdAt: -1 });
+};
+
+const getDriverHistory = async (driverId: string) => {
+  return await Ride.find({ driverId, status: "completed" })
+    .populate("riderId", "name phone")
+    .sort({ createdAt: -1 });
+};
+
+const getAvailableRides = async () => {
+  return await Ride.find({ status: "requested" })
+    .populate("riderId", "name phone")
+    .sort({ requestedAt: 1 });
+};
+
+const getAllRides = async () => {
+  return await Ride.find()
+    .populate("riderId", "name email phone")
+    .populate("driverId", "name email phone vehicleInfo")
+    .sort({ createdAt: -1 });
+};
+
 export const RideService = {
   rideCreate,
   acceptRide,
   updateRideStatus,
   cancelRide,
+  getRiderHistory,
+  getDriverHistory,
+  getAvailableRides,
+  getAllRides,
 };
