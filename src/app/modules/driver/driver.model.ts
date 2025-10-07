@@ -20,8 +20,7 @@ const DriverSchema = new Schema(
       default: false,
     },
     currentRideId: {
-      // type: Schema.Types.ObjectId,
-      // ref: "Ride",
+      
       type: String,
       default: null,
     },

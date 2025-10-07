@@ -20,8 +20,7 @@ const userSchema = new Schema<IUser>(
       default: Role.RIDER,
     },
     phone: { type: String },
-    isActive: { type: Boolean, default: true },
-    // isApproved: { type: Boolean, default: false },
+   
     isBlocked: { type: Boolean, default: false },
   },
   {
