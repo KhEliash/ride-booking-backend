@@ -7,6 +7,6 @@ const router = Router();
 
 router.post("/ride-request",checkAuth(Role.RIDER), RideController.rideCreate);
 router.post("/accept-ride", checkAuth(Role.DRIVER), RideController.acceptRide);
-router.post("/update-ride-status",  RideController.updateStatus);
+router.patch("/update-ride-status",  RideController.updateStatus);
 
 export const RideRoutes = router;
