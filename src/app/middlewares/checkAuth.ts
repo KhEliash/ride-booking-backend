@@ -17,11 +17,10 @@ export const checkAuth =
         accessToken,
         envVars.JWT_ACCESS_SECRET
       ) as JwtPayload;
-
       if (!authRoles.includes(verifiedToken.role)) {
         throw new AppError(403, "You are not permitted to view this route!!");
       }
-
+req.user= verifiedToken
       next();
     } catch (error) {
       next(error);

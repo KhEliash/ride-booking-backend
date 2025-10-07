@@ -51,10 +51,10 @@ const rideCreate = async (payload: IRide) => {
   };
 };
 
-const acceptRide = async (payload: any) => {
-  const { driverId, rideId } = payload;
+const acceptRide = async (params: any, driverId: string) => {
+  const { rideId } = params;
+  const driver = await Driver.findOne({ userId: driverId });
 
-  const driver = await Driver.findById(driverId);
   if (!driver) {
     throw new Error("Driver not found");
   }

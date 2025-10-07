@@ -4,6 +4,7 @@ import { catchAsync } from "../../utils/catchAsync";
 import httpStatus from "http-status-codes";
 import { sendResponse } from "../../utils/sendResponse";
 import { RideService } from "./ride.service";
+import { JwtPayload } from "jsonwebtoken";
 
 const rideCreate = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
@@ -14,27 +15,25 @@ const rideCreate = catchAsync(
       success: true,
       message: "Ride Created Successfully",
       data: result,
-      
     });
   }
 );
 const acceptRide = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
-    
-    const result = await RideService.acceptRide(req.body);
+    const decodeToken = req.user as JwtPayload;
+
+    const result = await RideService.acceptRide(req.params, decodeToken.userId);
 
     sendResponse(res, {
       statusCode: httpStatus.CREATED,
       success: true,
       message: "Ride Accepted Successfully",
       data: result,
-      
     });
   }
 );
 const updateStatus = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
-    
     const result = await RideService.updateRideStatus(req.body);
 
     sendResponse(res, {
@@ -42,7 +41,6 @@ const updateStatus = catchAsync(
       success: true,
       message: "Ride Status Updated Successfully",
       data: result,
-      
     });
   }
 );
@@ -50,5 +48,5 @@ const updateStatus = catchAsync(
 export const RideController = {
   rideCreate,
   acceptRide,
-  updateStatus
+  updateStatus,
 };
