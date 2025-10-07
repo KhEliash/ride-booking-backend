@@ -1,0 +1,595 @@
+{
+	"info": {
+		"_postman_id": "2d53f41f-227c-4a5f-bcdc-4f7d5c90c6b1",
+		"name": "Ride-Booking-Backend",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "46589224",
+		"_collection_link": "https://elias-3354528.postman.co/workspace/Elias's-Workspace~531fb3b6-7012-44f2-83b3-65dde3ddd942/collection/46589224-2d53f41f-227c-4a5f-bcdc-4f7d5c90c6b1?action=share&source=collection_link&creator=46589224"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "login",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/v1/user/all-users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"all-users"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "register users",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n    \"name\": \"Hasib\",\r\n    \"email\": \"hssib@gmail.com\"\r\n }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/user/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/v1/user/all-users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"all-users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "approve driver",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGRhYmFkOWY4MjU3OTlhMjVkYzEzZTAiLCJlbWFpbCI6ImVsaWFzQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc1OTc3MzgyMCwiZXhwIjoxNzYwMzc4NjIwfQ.DGOKtTn9f5bTNsPj805HJBwV_NVFpYei90fqjZeqg78",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/api/v1/user/approve/68e42ea702c4d1dca0f602f8",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"approve",
+								"68e42ea702c4d1dca0f602f8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "suspend driver",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGRhYmFkOWY4MjU3OTlhMjVkYzEzZTAiLCJlbWFpbCI6ImVsaWFzQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc1OTc3MzgyMCwiZXhwIjoxNzYwMzc4NjIwfQ.DGOKtTn9f5bTNsPj805HJBwV_NVFpYei90fqjZeqg78",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/api/v1/user/approve/68e42ea702c4d1dca0f602f8",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"approve",
+								"68e42ea702c4d1dca0f602f8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "block user",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGRhYmFkOWY4MjU3OTlhMjVkYzEzZTAiLCJlbWFpbCI6ImVsaWFzQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc1OTc3MzgyMCwiZXhwIjoxNzYwMzc4NjIwfQ.DGOKtTn9f5bTNsPj805HJBwV_NVFpYei90fqjZeqg78",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/api/v1/user/block/68e425ff6f7434bc0eafadfc",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"block",
+								"68e425ff6f7434bc0eafadfc"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "block user Copy",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGRhYmFkOWY4MjU3OTlhMjVkYzEzZTAiLCJlbWFpbCI6ImVsaWFzQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc1OTc3MzgyMCwiZXhwIjoxNzYwMzc4NjIwfQ.DGOKtTn9f5bTNsPj805HJBwV_NVFpYei90fqjZeqg78",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/api/v1/user/unblock/68e425ff6f7434bc0eafadfc",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"unblock",
+								"68e425ff6f7434bc0eafadfc"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Ride",
+			"item": [
+				{
+					"name": "Ride create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGU0MjVmZjZmNzQzNGJjMGVhZmFkZmMiLCJlbWFpbCI6InNpYW1AZ21haWwuY29tIiwicm9sZSI6InJpZGVyIiwiaWF0IjoxNzU5Nzg0NzEyLCJleHAiOjE3NjAzODk1MTJ9.jDQlwGHDTPmTWcJ6P1wNFV4GruhE7Y6Uz7_LkzCeVbs",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"riderId\": \"68e425ff6f7434bc0eafadfc\", \r\n  \"pickupLocation\": {\r\n    \"address\": \"123 Main St, City A\",\r\n    \"coordinates\": {\r\n      \"lat\": 12.9716,\r\n      \"lng\": 77.5946\r\n    }\r\n  },\r\n  \"destination\": {\r\n    \"address\": \"456 Market Rd, City B\",\r\n    \"coordinates\": {\r\n      \"lat\": 12.2958,\r\n      \"lng\": 76.6394\r\n    }\r\n  }\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/ride/ride-request",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"ride",
+								"ride-request"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "accept ride",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGU0MmVhNzAyYzRkMWRjYTBmNjAyZjYiLCJlbWFpbCI6ImtvbW9sQGdtYWlsLmNvbSIsInJvbGUiOiJkcml2ZXIiLCJpYXQiOjE3NTk4MjMyMzAsImV4cCI6MTc2MDQyODAzMH0.GLkZUCrNJH1ZA7484_rvniFhjz3FcTfBZJGTSfZM67c",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/api/v1/ride/accept-ride/68e4d712049d02e5a44391e9",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"ride",
+								"accept-ride",
+								"68e4d712049d02e5a44391e9"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update status",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGU0MmVhNzAyYzRkMWRjYTBmNjAyZjYiLCJlbWFpbCI6ImtvbW9sQGdtYWlsLmNvbSIsInJvbGUiOiJkcml2ZXIiLCJpYXQiOjE3NTk4MjMyMzAsImV4cCI6MTc2MDQyODAzMH0.GLkZUCrNJH1ZA7484_rvniFhjz3FcTfBZJGTSfZM67c",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"status\": \"completed\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/ride/update-ride-status/68e4d712049d02e5a44391e9",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"ride",
+								"update-ride-status",
+								"68e4d712049d02e5a44391e9"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "cancel",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGU0MjVmZjZmNzQzNGJjMGVhZmFkZmMiLCJlbWFpbCI6InNpYW1AZ21haWwuY29tIiwicm9sZSI6InJpZGVyIiwiaWF0IjoxNzU5Nzg0NzEyLCJleHAiOjE3NjAzODk1MTJ9.jDQlwGHDTPmTWcJ6P1wNFV4GruhE7Y6Uz7_LkzCeVbs",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/api/v1/ride/cancel/68e4d712049d02e5a44391e9",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"ride",
+								"cancel",
+								"68e4d712049d02e5a44391e9"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "rider history",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGU0MjVmZjZmNzQzNGJjMGVhZmFkZmMiLCJlbWFpbCI6InNpYW1AZ21haWwuY29tIiwicm9sZSI6InJpZGVyIiwiaWF0IjoxNzU5Nzg0NzEyLCJleHAiOjE3NjAzODk1MTJ9.jDQlwGHDTPmTWcJ6P1wNFV4GruhE7Y6Uz7_LkzCeVbs",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/api/v1/ride/rider-history",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"ride",
+								"rider-history"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "driver history",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGU0MmVhNzAyYzRkMWRjYTBmNjAyZjYiLCJlbWFpbCI6ImtvbW9sQGdtYWlsLmNvbSIsInJvbGUiOiJkcml2ZXIiLCJpYXQiOjE3NTk4MjMyMzAsImV4cCI6MTc2MDQyODAzMH0.GLkZUCrNJH1ZA7484_rvniFhjz3FcTfBZJGTSfZM67c",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/api/v1/ride/driver-history",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"ride",
+								"driver-history"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "vailable rides",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGU0MmVhNzAyYzRkMWRjYTBmNjAyZjYiLCJlbWFpbCI6ImtvbW9sQGdtYWlsLmNvbSIsInJvbGUiOiJkcml2ZXIiLCJpYXQiOjE3NTk4MjMyMzAsImV4cCI6MTc2MDQyODAzMH0.GLkZUCrNJH1ZA7484_rvniFhjz3FcTfBZJGTSfZM67c",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/api/v1/ride/available-rides",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"ride",
+								"available-rides"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "all rides",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGU0MjYxZDZmNzQzNGJjMGVhZmFlMDAiLCJlbWFpbCI6ImVsaWFzQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc1OTgzMTI1MywiZXhwIjoxNzYwNDM2MDUzfQ.m7U5yawEYR15rcJ29v4pC1d04kMPHPIVnrUi3XcEG1U",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/api/v1/ride/all-rides",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"ride",
+								"all-rides"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Driver",
+			"item": [
+				{
+					"name": "availability",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGU0MmVhNzAyYzRkMWRjYTBmNjAyZjYiLCJlbWFpbCI6ImtvbW9sQGdtYWlsLmNvbSIsInJvbGUiOiJkcml2ZXIiLCJpYXQiOjE3NTk4NDExMzksImV4cCI6MTc2MDQ0NTkzOX0.7cfC2AzMEAjEZZ25poiKVqiXhronhSAPwJPvK7IpKaE",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"isOnline\": \"true\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/driver/availability",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"driver",
+								"availability"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "earnings",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGU0MmVhNzAyYzRkMWRjYTBmNjAyZjYiLCJlbWFpbCI6ImtvbW9sQGdtYWlsLmNvbSIsInJvbGUiOiJkcml2ZXIiLCJpYXQiOjE3NTk4NDExMzksImV4cCI6MTc2MDQ0NTkzOX0.7cfC2AzMEAjEZZ25poiKVqiXhronhSAPwJPvK7IpKaE",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/api/v1/driver/earnings",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"driver",
+								"earnings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "profile",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGU0MmVhNzAyYzRkMWRjYTBmNjAyZjYiLCJlbWFpbCI6ImtvbW9sQGdtYWlsLmNvbSIsInJvbGUiOiJkcml2ZXIiLCJpYXQiOjE3NTk4NDExMzksImV4cCI6MTc2MDQ0NTkzOX0.7cfC2AzMEAjEZZ25poiKVqiXhronhSAPwJPvK7IpKaE",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/api/v1/driver/earnings",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"driver",
+								"earnings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "all drivers",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGU0MmVhNzAyYzRkMWRjYTBmNjAyZjYiLCJlbWFpbCI6ImtvbW9sQGdtYWlsLmNvbSIsInJvbGUiOiJkcml2ZXIiLCJpYXQiOjE3NTk4NDExMzksImV4cCI6MTc2MDQ0NTkzOX0.7cfC2AzMEAjEZZ25poiKVqiXhronhSAPwJPvK7IpKaE",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/api/v1/driver/earnings",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"driver",
+								"earnings"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
