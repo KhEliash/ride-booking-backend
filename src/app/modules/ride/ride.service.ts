@@ -94,8 +94,10 @@ const acceptRide = async (params: any, driverId: string) => {
   ]);
 };
 
-const updateRideStatus = async (payload: any) => {
-  const { rideId, driverId, status } = payload;
+const updateRideStatus = async (params: any,driverId: string,payload: any) => {
+  const { rideId } = params;
+  const { status } = payload;
+   
   const ride = await Ride.findOne({ _id: rideId, driverId });
   if (!ride) {
     throw new Error("Ride not found or you are not assigned to this ride");

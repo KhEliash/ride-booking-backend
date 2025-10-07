@@ -34,7 +34,12 @@ const acceptRide = catchAsync(
 );
 const updateStatus = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
-    const result = await RideService.updateRideStatus(req.body);
+    const decodeToken = req.user as JwtPayload;
+    const result = await RideService.updateRideStatus(
+      req.params,
+      decodeToken.userId,
+      req.body
+    );
 
     sendResponse(res, {
       statusCode: httpStatus.CREATED,
