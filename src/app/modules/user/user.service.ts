@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import AppError from "../../errorHelpers/AppError";
 import { IUser } from "./user.interface";
 import { User } from "./user.model";
@@ -67,7 +68,65 @@ const getAllUsers = async () => {
   };
 };
 
+const approveDriver = async (params: any) => {
+  const { driverId } = params;
+  const driver = await Driver.findByIdAndUpdate(
+    driverId,
+    { isApproved: true },
+    { new: true }
+  );
+
+  if (!driver) {
+    throw new Error("Driver not found");
+  }
+  return driver;
+};
+const suspendDriver = async (params: any) => {
+  const { driverId } = params;
+  const driver = await Driver.findByIdAndUpdate(
+    driverId,
+    { isApproved: false },
+    { new: true }
+  );
+
+  if (!driver) {
+    throw new Error("Driver not found");
+  }
+  return driver;
+};
+
+const blockUser = async (params: any) => {
+  const { userId } = params;
+  const user = await User.findByIdAndUpdate(
+    userId,
+    { isBlocked: true },
+    { new: true }
+  );
+
+  if (!user) {
+    throw new Error("User not found");
+  }
+  return user;
+};
+const unBlockUser = async (params: any) => {
+  const { userId } = params;
+  const user = await User.findByIdAndUpdate(
+    userId,
+    { isBlocked: false },
+    { new: true }
+  );
+
+  if (!user) {
+    throw new Error("User not found");
+  }
+  return user;
+};
+
 export const UserService = {
   createUser,
   getAllUsers,
+  approveDriver,
+  suspendDriver,
+  blockUser,
+  unBlockUser
 };

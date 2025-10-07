@@ -4,6 +4,7 @@ import httpStatus from "http-status-codes";
 import { UserService } from "./user.service";
 import { catchAsync } from "../../utils/catchAsync";
 import { sendResponse } from "../../utils/sendResponse";
+import { JwtPayload } from "jsonwebtoken";
 
 const createUser = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
@@ -31,8 +32,68 @@ const getAllUsers = catchAsync(
     });
   }
 );
+const approveDriver = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+  
+    const result = await UserService.approveDriver(req.params);
+
+    sendResponse(res, {
+      statusCode: httpStatus.CREATED,
+      success: true,
+      message: "Approved Successfully",
+      data: result,
+       
+    });
+  }
+);
+const suspendDriver = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+  
+    const result = await UserService.suspendDriver(req.params);
+
+    sendResponse(res, {
+      statusCode: httpStatus.CREATED,
+      success: true,
+      message: "Suspend Successfully",
+      data: result,
+       
+    });
+  }
+);
+const blockUser = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+  
+    const result = await UserService.blockUser(req.params);
+
+    sendResponse(res, {
+      statusCode: httpStatus.CREATED,
+      success: true,
+      message: "Blocked Successfully",
+      data: result,
+       
+    });
+  }
+);
+const unBlockUser = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+  
+    const result = await UserService.unBlockUser(req.params);
+
+    sendResponse(res, {
+      statusCode: httpStatus.CREATED,
+      success: true,
+      message: "UnBlocked Successfully",
+      data: result,
+       
+    });
+  }
+);
 
 export const UserController = {
   createUser,
   getAllUsers,
+  approveDriver,
+  suspendDriver,
+  blockUser,
+  unBlockUser
 };
