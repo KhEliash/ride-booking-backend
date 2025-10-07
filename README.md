@@ -175,12 +175,6 @@ You can test all endpoints via:
 [Click to open collection](https://elias-3354528.postman.co/workspace/Elias's-Workspace~531fb3b6-7012-44f2-83b3-65dde3ddd942/collection/46589224-2d53f41f-227c-4a5f-bcdc-4f7d5c90c6b1?action=share&source=collection_link&creator=46589224)
 
 
-## 🧠 Optional Enhancements
-
-* 🚀 Driver ratings & feedback
-* 💰 Fare estimation algorithm
-
-
 ---
 
 ## 🙌 Contributing

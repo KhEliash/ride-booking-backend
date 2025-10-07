@@ -13,10 +13,19 @@
 				{
 					"name": "login",
 					"request": {
-						"method": "GET",
+						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \r\n    \"email\": \"elias@gmail.com\",\r\n    \"password\": \"shdhs\"\r\n }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "http://localhost:5000/api/v1/user/all-users",
+							"raw": "http://localhost:5000/api/v1/auth/login",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -25,8 +34,8 @@
 							"path": [
 								"api",
 								"v1",
-								"user",
-								"all-users"
+								"auth",
+								"login"
 							]
 						}
 					},
@@ -44,7 +53,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": " {\r\n    \"name\": \"Hasib\",\r\n    \"email\": \"hssib@gmail.com\"\r\n }",
+							"raw": "{\r\n    \"name\": \"Siam\",\r\n    \"email\": \"siam@gmail.com\",\r\n    \"password\": \"shdhs\",\r\n    \"role\": \"rider\",\r\n    \"vehicleInfo\": {\r\n        \"model\": \"Toyota Prius\",\r\n        \"licensePlate\": \"ABC-1234\"\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -72,7 +81,13 @@
 					"name": "get all users",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGRhYmFkOWY4MjU3OTlhMjVkYzEzZTAiLCJlbWFpbCI6ImVsaWFzQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc1OTc3MzgyMCwiZXhwIjoxNzYwMzc4NjIwfQ.DGOKtTn9f5bTNsPj805HJBwV_NVFpYei90fqjZeqg78",
+								"type": "text"
+							}
+						],
 						"url": {
 							"raw": "http://localhost:5000/api/v1/user/all-users",
 							"protocol": "http",
@@ -131,7 +146,7 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:5000/api/v1/user/approve/68e42ea702c4d1dca0f602f8",
+							"raw": "http://localhost:5000/api/v1/user/suspend/68e42ea702c4d1dca0f602f8",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -141,7 +156,7 @@
 								"api",
 								"v1",
 								"user",
-								"approve",
+								"suspend",
 								"68e42ea702c4d1dca0f602f8"
 							]
 						}
@@ -224,7 +239,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"riderId\": \"68e425ff6f7434bc0eafadfc\", \r\n  \"pickupLocation\": {\r\n    \"address\": \"123 Main St, City A\",\r\n    \"coordinates\": {\r\n      \"lat\": 12.9716,\r\n      \"lng\": 77.5946\r\n    }\r\n  },\r\n  \"destination\": {\r\n    \"address\": \"456 Market Rd, City B\",\r\n    \"coordinates\": {\r\n      \"lat\": 12.2958,\r\n      \"lng\": 76.6394\r\n    }\r\n  }\r\n}\r\n",
+							"raw": "{\r\n  \"riderId\": \"68e52cfb7fedeac6b7c350ee\", \r\n  \"pickupLocation\": {\r\n    \"address\": \"123 Main St, City A\",\r\n    \"coordinates\": {\r\n      \"lat\": 12.9716,\r\n      \"lng\": 77.5946\r\n    }\r\n  },\r\n  \"destination\": {\r\n    \"address\": \"456 Market Rd, City B\",\r\n    \"coordinates\": {\r\n      \"lat\": 12.2958,\r\n      \"lng\": 76.6394\r\n    }\r\n  }\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -545,7 +560,7 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:5000/api/v1/driver/earnings",
+							"raw": "http://localhost:5000/api/v1/driver/profile",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -555,7 +570,7 @@
 								"api",
 								"v1",
 								"driver",
-								"earnings"
+								"profile"
 							]
 						}
 					},
@@ -568,12 +583,12 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGU0MmVhNzAyYzRkMWRjYTBmNjAyZjYiLCJlbWFpbCI6ImtvbW9sQGdtYWlsLmNvbSIsInJvbGUiOiJkcml2ZXIiLCJpYXQiOjE3NTk4NDExMzksImV4cCI6MTc2MDQ0NTkzOX0.7cfC2AzMEAjEZZ25poiKVqiXhronhSAPwJPvK7IpKaE",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGRhYmFkOWY4MjU3OTlhMjVkYzEzZTAiLCJlbWFpbCI6ImVsaWFzQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc1OTc3MzgyMCwiZXhwIjoxNzYwMzc4NjIwfQ.DGOKtTn9f5bTNsPj805HJBwV_NVFpYei90fqjZeqg78",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "http://localhost:5000/api/v1/driver/earnings",
+							"raw": "http://localhost:5000/api/v1/driver/allDrivers",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -583,7 +598,7 @@
 								"api",
 								"v1",
 								"driver",
-								"earnings"
+								"allDrivers"
 							]
 						}
 					},
