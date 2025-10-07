@@ -49,9 +49,23 @@ const updateStatus = catchAsync(
     });
   }
 );
+const cancelRide = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const decodeToken = req.user as JwtPayload;
+    const result = await RideService.cancelRide(req.params, decodeToken.userId);
+
+    sendResponse(res, {
+      statusCode: httpStatus.CREATED,
+      success: true,
+      message: "Ride Canceled Successfully",
+      data: result,
+    });
+  }
+);
 
 export const RideController = {
   rideCreate,
   acceptRide,
   updateStatus,
+  cancelRide,
 };

@@ -94,10 +94,14 @@ const acceptRide = async (params: any, driverId: string) => {
   ]);
 };
 
-const updateRideStatus = async (params: any,driverId: string,payload: any) => {
+const updateRideStatus = async (
+  params: any,
+  driverId: string,
+  payload: any
+) => {
   const { rideId } = params;
   const { status } = payload;
-   
+
   const ride = await Ride.findOne({ _id: rideId, driverId });
   if (!ride) {
     throw new Error("Ride not found or you are not assigned to this ride");
@@ -145,8 +149,40 @@ const updateRideStatus = async (params: any,driverId: string,payload: any) => {
   ]);
 };
 
+const cancelRide = async (params: any, driverId: string) => {
+  const { rideId } = params;
+
+  const ride = await Ride.findOne({ _id: rideId, riderId: driverId });
+  if (!ride) {
+    throw new Error(
+      "Ride not found or you are not authorized to cancel this ride"
+    );
+  }
+
+  if (!["requested", "accepted"].includes(ride.status)) {
+    throw new Error(`Cannot cancel ride at ${ride.status} stage`);
+  }
+
+  ride.status = "cancelled";
+  ride.cancelledAt = new Date();
+  await ride.save();
+
+  // If driver was assigned, clear their current ride
+  if (ride.driverId) {
+    await Driver.findOneAndUpdate(
+      { userId: ride.driverId },
+      {
+        $unset: { currentRideId: 1 },
+      }
+    );
+  }
+
+  return ride;
+};
+
 export const RideService = {
   rideCreate,
   acceptRide,
   updateRideStatus,
+  cancelRide,
 };
