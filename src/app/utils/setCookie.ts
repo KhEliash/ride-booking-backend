@@ -6,7 +6,7 @@ export const setCookie = (res: Response, tokenInfo: string) => {
       httpOnly: true,
       secure: true,
       sameSite: "none",
-    //   maxAge: 2592000000,
+    //   maxAge: ,
     });
   }
 };
