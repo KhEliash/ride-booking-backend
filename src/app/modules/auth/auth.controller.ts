@@ -7,7 +7,7 @@ import httpStatus from "http-status-codes";
 import { AuthServices } from "./auth.service";
 const credentialLogin = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
-    const loginInfo = await AuthServices.credentialLogin(req.body);
+    const loginInfo = await AuthServices.credentialLogin(res,req.body);
 
     sendResponse(res, {
       statusCode: httpStatus.CREATED,

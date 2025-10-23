@@ -5,8 +5,10 @@ import bcrypt from "bcryptjs";
 import jwt, { SignOptions } from "jsonwebtoken";
 import { User } from "../user/user.model";
 import { envVars } from "../../config/env";
+import { setCookie } from "../../utils/setCookie";
+import { Response } from "express";
 
-const credentialLogin = async (payload: Partial<IUser>) => {
+const credentialLogin = async (res: Response, payload: Partial<IUser>) => {
   const { email, password } = payload;
   const isUserExist = await User.findOne({ email });
 
@@ -30,6 +32,8 @@ const credentialLogin = async (payload: Partial<IUser>) => {
   const accessToken = jwt.sign(jwtPayload, envVars.JWT_ACCESS_SECRET, {
     expiresIn: envVars.JWT_ACCESS_EXPIRES,
   } as SignOptions);
+
+  setCookie(res, accessToken);
 
   return {
     accessToken,
