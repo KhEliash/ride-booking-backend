@@ -56,6 +56,13 @@ const createUser = async (payload: IUser) => {
   return user;
 };
 
+const getMe = async (userId: string) => {
+  const user = await User.findById(userId).select("-password");
+  return {
+    data: user,
+  };
+};
+
 const getAllUsers = async () => {
   const users = await User.find({});
   const totalUsers = await User.countDocuments();
@@ -124,9 +131,10 @@ const unBlockUser = async (params: any) => {
 
 export const UserService = {
   createUser,
+  getMe,
   getAllUsers,
   approveDriver,
   suspendDriver,
   blockUser,
-  unBlockUser
+  unBlockUser,
 };

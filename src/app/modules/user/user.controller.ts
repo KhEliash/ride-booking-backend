@@ -19,6 +19,18 @@ const createUser = catchAsync(
   }
 );
 
+const getMe = async (req: Request, res: Response) => {
+  const decodedToken = req.user as JwtPayload;
+  const result = await UserService.getMe(decodedToken.userId);
+
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus.CREATED,
+    message: "Profile Retrieved Successfully",
+    data: result.data,
+  });
+};
+
 const getAllUsers = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     const result = await UserService.getAllUsers();
@@ -34,7 +46,6 @@ const getAllUsers = catchAsync(
 );
 const approveDriver = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
-  
     const result = await UserService.approveDriver(req.params);
 
     sendResponse(res, {
@@ -42,13 +53,11 @@ const approveDriver = catchAsync(
       success: true,
       message: "Approved Successfully",
       data: result,
-       
     });
   }
 );
 const suspendDriver = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
-  
     const result = await UserService.suspendDriver(req.params);
 
     sendResponse(res, {
@@ -56,13 +65,11 @@ const suspendDriver = catchAsync(
       success: true,
       message: "Suspend Successfully",
       data: result,
-       
     });
   }
 );
 const blockUser = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
-  
     const result = await UserService.blockUser(req.params);
 
     sendResponse(res, {
@@ -70,13 +77,11 @@ const blockUser = catchAsync(
       success: true,
       message: "Blocked Successfully",
       data: result,
-       
     });
   }
 );
 const unBlockUser = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
-  
     const result = await UserService.unBlockUser(req.params);
 
     sendResponse(res, {
@@ -84,16 +89,16 @@ const unBlockUser = catchAsync(
       success: true,
       message: "UnBlocked Successfully",
       data: result,
-       
     });
   }
 );
 
 export const UserController = {
   createUser,
+  getMe,
   getAllUsers,
   approveDriver,
   suspendDriver,
   blockUser,
-  unBlockUser
+  unBlockUser,
 };
