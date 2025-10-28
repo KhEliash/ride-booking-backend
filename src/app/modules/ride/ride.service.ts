@@ -205,6 +205,27 @@ const getAllRides = async () => {
     .sort({ createdAt: -1 });
 };
 
+const getRideById = async (rideId: string) => {
+  const rideDoc: any = await Ride.findById(rideId);
+  if (!rideDoc) throw new AppError(httpStatus.NOT_FOUND, "Ride not found");
+
+  const ride = rideDoc.toObject();
+
+  // Get driver info
+  const driver = await Driver.findOne({ userId: ride.driverId }).select(
+    "vehicleInfo userId"
+  );
+  if (driver) {
+    const user = await User.findById(driver.userId).select("name");
+    ride.driverInfo = {
+      ...driver.toObject(),
+      name: user?.name || null,
+    };
+  }
+
+  return ride;
+};
+
 export const RideService = {
   rideCreate,
   acceptRide,
@@ -212,6 +233,7 @@ export const RideService = {
   cancelRide,
   getRiderHistory,
   getDriverHistory,
+  getRideById,
   getAvailableRides,
   getAllRides,
 };

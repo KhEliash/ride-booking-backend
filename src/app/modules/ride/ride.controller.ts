@@ -101,6 +101,18 @@ const getAvailableRides = catchAsync(
     });
   }
 );
+
+const getRideById = catchAsync(async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const ride = await RideService.getRideById(id);
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "Ride details get successfully",
+    data: ride,
+  });
+});
+
 const getAllRides = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
      
@@ -123,5 +135,6 @@ export const RideController = {
   getRiderHistory,
   getDriverHistory,
   getAvailableRides,
+  getRideById,
   getAllRides
 };

@@ -9,6 +9,7 @@ router.get("/all-rides",checkAuth(Role.ADMIN), RideController.getAllRides);
 router.post("/ride-request",checkAuth(Role.RIDER), RideController.rideCreate);
 router.patch("/cancel/:rideId",checkAuth(Role.RIDER), RideController.cancelRide);
 router.get("/rider-history",checkAuth(Role.RIDER), RideController.getRiderHistory);
+router.get("/:id",checkAuth(Role.RIDER), RideController.getRideById);
 router.get("/driver-history",checkAuth(Role.DRIVER), RideController.getDriverHistory);
 router.get("/available-rides",checkAuth(Role.DRIVER), RideController.getAvailableRides);
 router.post("/accept-ride/:rideId", checkAuth(Role.DRIVER),  RideController.acceptRide);
