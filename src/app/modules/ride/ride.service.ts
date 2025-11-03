@@ -187,7 +187,7 @@ const getRiderHistory = async (riderId: string) => {
 };
 
 const getDriverHistory = async (driverId: string) => {
-  return await Ride.find({ driverId, status: "completed" })
+  return await Ride.find({ driverId })
     .populate("riderId", "name phone")
     .sort({ createdAt: -1 });
 };
