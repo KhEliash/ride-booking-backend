@@ -20,7 +20,6 @@ const DriverSchema = new Schema(
       default: false,
     },
     currentRideId: {
-      
       type: String,
       default: null,
     },
@@ -28,6 +27,12 @@ const DriverSchema = new Schema(
       type: Number,
       default: 0,
     },
+    earningsHistory: [
+      {
+        date: { type: Date },
+        fare: { type: Number },
+      },
+    ],
   },
   {
     timestamps: true,

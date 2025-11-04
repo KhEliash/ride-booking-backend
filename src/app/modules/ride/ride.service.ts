@@ -138,18 +138,42 @@ const updateRideStatus = async (
       ride.inTransitAt = new Date();
       break;
     }
-    case "completed": {
-      ride.completedAt = new Date();
+    // case "completed": {
+    //   ride.completedAt = new Date();
 
-      // Update driver earnings and clear current ride
-      const driver = await Driver.findOne({ userId: driverId });
-      if (driver && ride.fare) {
-        driver.earnings += ride.fare;
-        driver.currentRideId = "";
-        await driver.save();
-      }
-      break;
-    }
+    //   // Update driver earnings and clear current ride
+    //   const driver = await Driver.findOne({ userId: driverId });
+    //   if (driver && ride.fare) {
+    //     driver.earnings += ride.fare;
+    //     driver.currentRideId = "";
+    //     await driver.save();
+    //   }
+    //   break;
+    // }
+    case "completed": {
+  ride.completedAt = new Date();
+
+  const driver = await Driver.findOne({ userId: driverId });
+
+  if (driver && ride.fare) {
+    // Increment total earnings
+    driver.earnings += ride.fare;
+
+    // Append to earnings history
+    driver.earningsHistory.push({
+      date: new Date(),
+      fare: ride.fare,
+    });
+
+    // Clear current ride
+    driver.currentRideId = "";
+
+    await driver.save();
+  }
+
+  break;
+}
+
   }
 
   await ride.save();
