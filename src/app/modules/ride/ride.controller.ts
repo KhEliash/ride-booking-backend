@@ -32,6 +32,20 @@ const acceptRide = catchAsync(
     });
   }
 );
+
+const getCurrentRide = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const decodeToken = req.user as JwtPayload;
+    const result = await RideService.getCurrentRide(decodeToken.userId);
+
+    sendResponse(res, {
+      statusCode: httpStatus.CREATED,
+      success: true,
+      message: "Get Current Ride Successfully",
+      data: result,
+    });
+  }
+);
 const updateStatus = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     const decodeToken = req.user as JwtPayload;
@@ -65,7 +79,7 @@ const cancelRide = catchAsync(
 const getRiderHistory = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     const decodeToken = req.user as JwtPayload;
-    const result = await RideService.getRiderHistory( decodeToken.userId);
+    const result = await RideService.getRiderHistory(decodeToken.userId);
 
     sendResponse(res, {
       statusCode: httpStatus.CREATED,
@@ -78,7 +92,7 @@ const getRiderHistory = catchAsync(
 const getDriverHistory = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     const decodeToken = req.user as JwtPayload;
-    const result = await RideService.getDriverHistory( decodeToken.userId);
+    const result = await RideService.getDriverHistory(decodeToken.userId);
 
     sendResponse(res, {
       statusCode: httpStatus.CREATED,
@@ -90,7 +104,6 @@ const getDriverHistory = catchAsync(
 );
 const getAvailableRides = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
-     
     const result = await RideService.getAvailableRides();
 
     sendResponse(res, {
@@ -115,7 +128,6 @@ const getRideById = catchAsync(async (req: Request, res: Response) => {
 
 const getAllRides = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
-     
     const result = await RideService.getAllRides();
 
     sendResponse(res, {
@@ -136,5 +148,6 @@ export const RideController = {
   getDriverHistory,
   getAvailableRides,
   getRideById,
-  getAllRides
+  getCurrentRide,
+  getAllRides,
 };

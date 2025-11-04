@@ -93,6 +93,18 @@ const acceptRide = async (params: any, driverId: string) => {
     { path: "driverId", select: "name phone vehicleInfo" },
   ]);
 };
+const getCurrentRide = async (driverId: string) => {
+ 
+  const activeStatuses = ["accepted", "picked_up", "in_transit"];
+
+  const ride = await Ride.findOne({
+    driverId: driverId,
+    status: { $in: activeStatuses },
+  }).sort({ updatedAt: -1 }); 
+
+  return ride;
+
+};
 
 const updateRideStatus = async (
   params: any,
@@ -235,5 +247,6 @@ export const RideService = {
   getDriverHistory,
   getRideById,
   getAvailableRides,
+  getCurrentRide,
   getAllRides,
 };

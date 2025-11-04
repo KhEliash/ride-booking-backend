@@ -8,6 +8,7 @@ const router = Router();
 router.get("/all-rides",checkAuth(Role.ADMIN), RideController.getAllRides);
 router.post("/ride-request",checkAuth(Role.RIDER), RideController.rideCreate);
 router.get("/available-rides",checkAuth(Role.DRIVER) , RideController.getAvailableRides);
+router.get("/current-ride",checkAuth(Role.DRIVER) , RideController.getCurrentRide);
 router.get("/rider-history",checkAuth(Role.RIDER), RideController.getRiderHistory);
 router.get("/driver-history",checkAuth(Role.DRIVER), RideController.getDriverHistory);
 router.patch("/cancel/:rideId",checkAuth(Role.RIDER), RideController.cancelRide);
