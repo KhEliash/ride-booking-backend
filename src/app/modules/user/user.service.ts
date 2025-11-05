@@ -63,15 +63,46 @@ const getMe = async (userId: string) => {
   };
 };
 
+// const getAllUsers = async () => {
+//   const users = await User.find({}).select("-password").populate("driver", "name vehicleInfo");
+//   const totalUsers = await User.countDocuments();
+
+//   return {
+//     data: users,
+//     meta: {
+//       total: totalUsers,
+//     },
+//   };
+// };
+
 const getAllUsers = async () => {
-  const users = await User.find({});
+  const users = await User.aggregate([
+    {
+      $lookup: {
+        from: "drivers",
+        localField: "_id",
+        foreignField: "userId",
+        as: "driverData",
+      },
+    },
+    {
+      $addFields: {
+        isApproved: { $arrayElemAt: ["$driverData.isApproved", 0] },
+      },
+    },
+    {
+      $project: {
+        password: 0,
+        driverData: 0,
+      },
+    },
+  ]);
+
   const totalUsers = await User.countDocuments();
 
   return {
     data: users,
-    meta: {
-      total: totalUsers,
-    },
+    meta: { total: totalUsers },
   };
 };
 
