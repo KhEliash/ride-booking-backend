@@ -151,29 +151,28 @@ const updateRideStatus = async (
     //   break;
     // }
     case "completed": {
-  ride.completedAt = new Date();
+      ride.completedAt = new Date();
 
-  const driver = await Driver.findOne({ userId: driverId });
+      const driver = await Driver.findOne({ userId: driverId });
 
-  if (driver && ride.fare) {
-    // Increment total earnings
-    driver.earnings += ride.fare;
+      if (driver && ride.fare) {
+        // Increment total earnings
+        driver.earnings += ride.fare;
 
-    // Append to earnings history
-    driver.earningsHistory.push({
-      date: new Date(),
-      fare: ride.fare,
-    });
+        // Append to earnings history
+        driver.earningsHistory.push({
+          date: new Date(),
+          fare: ride.fare,
+        });
 
-    // Clear current ride
-    driver.currentRideId = "";
+        // Clear current ride
+        driver.currentRideId = "";
 
-    await driver.save();
-  }
+        await driver.save();
+      }
 
-  break;
-}
-
+      break;
+    }
   }
 
   await ride.save();
@@ -232,10 +231,25 @@ const getAvailableRides = async () => {
     .sort({ requestedAt: 1 });
 };
 
+// const getAllRides = async () => {
+//   return await Ride.find()
+//     .populate("riderId", "name email phone")
+//     .populate("driverId", "name vehicleInfo")
+//     .sort({ createdAt: -1 });
+// };
+
 const getAllRides = async () => {
   return await Ride.find()
     .populate("riderId", "name email phone")
-    .populate("driverId", "name email phone vehicleInfo")
+    .populate({
+      path: "driverId",
+      select: "vehicleInfo",
+      populate: {
+        path: "_id",
+        model: "User",
+        select: "name email phone",
+      },
+    })
     .sort({ createdAt: -1 });
 };
 

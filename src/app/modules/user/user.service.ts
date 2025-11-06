@@ -48,6 +48,7 @@ const createUser = async (payload: IUser) => {
   // If the user is a driver
   if (role === "driver") {
     await Driver.create({
+      _id: user._id,
       userId: user._id,
       vehicleInfo,
     });
