@@ -108,10 +108,16 @@ const getAllUsers = async () => {
 
 const approveDriver = async (params: any) => {
   const { driverId } = params;
-  const driver = await Driver.findByIdAndUpdate(
-    driverId,
-    { isApproved: true },
-    { new: true }
+  const driver = await Driver.findOneAndUpdate(
+    { userId: driverId },
+    {
+      $set: {
+        isApproved: true,
+      },
+    },
+    {
+      new: true,
+    } as any
   );
 
   if (!driver) {
