@@ -11,9 +11,11 @@ import { Response } from "express";
 const credentialLogin = async (res: Response, payload: Partial<IUser>) => {
   const { email, password } = payload;
   const isUserExist = await User.findOne({ email });
-
   if (!isUserExist) {
     throw new AppError(httpStatus.BAD_REQUEST, "User Does Not Exist");
+  }
+  if (isUserExist.isBlocked === true) {
+    throw new AppError(httpStatus.BAD_REQUEST, "User is blocked by admin");
   }
   const isPasswordMatch = await bcrypt.compare(
     password as string,
