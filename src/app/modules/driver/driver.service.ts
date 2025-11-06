@@ -40,7 +40,9 @@ const getProfile = async (driverId: string) => {
   return driver;
 };
 const getAllDrivers = async () => {
-  return await Driver.find().sort({ createdAt: -1 }).populate("userId");
+  return await Driver.find()
+    .sort({ createdAt: -1 })
+    .populate("userId", "-password");
 };
 
 export const DriverService = {

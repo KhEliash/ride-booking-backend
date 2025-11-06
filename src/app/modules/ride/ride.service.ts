@@ -138,18 +138,7 @@ const updateRideStatus = async (
       ride.inTransitAt = new Date();
       break;
     }
-    // case "completed": {
-    //   ride.completedAt = new Date();
-
-    //   // Update driver earnings and clear current ride
-    //   const driver = await Driver.findOne({ userId: driverId });
-    //   if (driver && ride.fare) {
-    //     driver.earnings += ride.fare;
-    //     driver.currentRideId = "";
-    //     await driver.save();
-    //   }
-    //   break;
-    // }
+  
     case "completed": {
       ride.completedAt = new Date();
 
