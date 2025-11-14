@@ -12,5 +12,7 @@ router.patch("/approve/:driverId", checkAuth(Role.ADMIN), UserController.approve
 router.patch("/suspend/:driverId", checkAuth(Role.ADMIN), UserController.suspendDriver);
 router.patch("/block/:userId", checkAuth(Role.ADMIN), UserController.blockUser);
 router.patch("/unblock/:userId", checkAuth(Role.ADMIN), UserController.unBlockUser);
+router.put("/update-profile", checkAuth(Role.RIDER,Role.DRIVER,Role.ADMIN), UserController.updateProfile);
+
 
 export const UserRoutes = router;

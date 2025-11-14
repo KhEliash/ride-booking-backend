@@ -57,6 +57,36 @@ const createUser = async (payload: IUser) => {
   return user;
 };
 
+const updateProfile = async (userId: string, payload: any) => {
+  const user = await User.findById(userId);
+  if (!user) {
+    throw new AppError(httpStatus.NOT_FOUND, "User not found");
+  }
+
+  const { name, phone, vehicleInfo } = payload;
+
+  if (name) user.name = name;
+  if (phone) user.phone = phone;
+
+  await user.save();
+
+  //   If  user is a driver
+  if (user.role === "driver" && vehicleInfo) {
+    await Driver.findOneAndUpdate(
+      { userId: user._id },
+      {
+        $set: {
+          "vehicleInfo.model": vehicleInfo.model,
+          "vehicleInfo.licensePlate": vehicleInfo.licensePlate,
+        },
+      },
+      { new: true }
+    );
+  }
+
+  return user;
+};
+
 const getMe = async (userId: string) => {
   const user = await User.findById(userId).select("-password");
   return {
@@ -181,4 +211,5 @@ export const UserService = {
   suspendDriver,
   blockUser,
   unBlockUser,
+  updateProfile,
 };

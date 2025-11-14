@@ -19,6 +19,18 @@ const createUser = catchAsync(
   }
 );
 
+const updateProfile = catchAsync(async (req, res) => {
+  const userId = req.user.userId;  
+  const updatedUser = await UserService.updateProfile(userId, req.body);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "Profile updated successfully",
+    data: updatedUser,
+  });
+});
+
 const getMe = async (req: Request, res: Response) => {
   const decodedToken = req.user as JwtPayload;
   const result = await UserService.getMe(decodedToken.userId);
@@ -101,4 +113,5 @@ export const UserController = {
   suspendDriver,
   blockUser,
   unBlockUser,
+  updateProfile
 };
