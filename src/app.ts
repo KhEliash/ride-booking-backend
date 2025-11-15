@@ -6,13 +6,13 @@ import { globalErrorHandler } from "./app/middlewares/globalErrHandlers";
 import { notFound } from "./app/middlewares/notFound";
 
 const app = express();
+app.set("trust proxy", 1);
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
   origin: [
-    "https://ride-booking-api-lyart.vercel.app", 
-    "http://localhost:5173",
-    "https://ride-booking-iota.vercel.app"
+    "https://ride-booking-iota.vercel.app",
+    "http://localhost:5173"
   ],
   credentials: true
 }));
