@@ -19,7 +19,7 @@ const sendResponse_1 = require("../../utils/sendResponse");
 const http_status_codes_1 = __importDefault(require("http-status-codes"));
 const auth_service_1 = require("./auth.service");
 const credentialLogin = (0, catchAsync_1.catchAsync)((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    const loginInfo = yield auth_service_1.AuthServices.credentialLogin(req.body);
+    const loginInfo = yield auth_service_1.AuthServices.credentialLogin(res, req.body);
     (0, sendResponse_1.sendResponse)(res, {
         statusCode: http_status_codes_1.default.CREATED,
         success: true,
@@ -27,6 +27,20 @@ const credentialLogin = (0, catchAsync_1.catchAsync)((req, res, next) => __await
         data: loginInfo,
     });
 }));
+const credentialLogout = (0, catchAsync_1.catchAsync)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    res.clearCookie("accessToken", {
+        httpOnly: true,
+        secure: true,
+        sameSite: "none",
+    });
+    (0, sendResponse_1.sendResponse)(res, {
+        success: true,
+        statusCode: http_status_codes_1.default.OK,
+        message: "User Logged Out Successfully",
+        data: null,
+    });
+}));
 exports.AuthControllers = {
     credentialLogin,
+    credentialLogout
 };

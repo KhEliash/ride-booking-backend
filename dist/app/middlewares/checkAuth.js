@@ -18,7 +18,7 @@ const jwt_1 = require("../utils/jwt");
 const env_1 = require("../config/env");
 const checkAuth = (...authRoles) => (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const accessToken = req.headers.authorization;
+        const accessToken = req.headers.authorization || req.cookies.accessToken;
         if (!accessToken) {
             throw new AppError_1.default(403, "No token received");
         }

@@ -11,7 +11,8 @@ app.use(cookieParser());
 app.use(cors({
   origin: [
     "https://ride-booking-api-lyart.vercel.app", 
-    "http://localhost:5173"
+    "http://localhost:5173",
+    "https://ride-booking-iota.vercel.app"
   ],
   credentials: true
 }));

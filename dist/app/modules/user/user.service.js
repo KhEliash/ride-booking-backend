@@ -52,25 +52,88 @@ const createUser = (payload) => __awaiter(void 0, void 0, void 0, function* () {
     // If the user is a driver
     if (role === "driver") {
         yield driver_model_1.Driver.create({
+            _id: user._id,
             userId: user._id,
             vehicleInfo,
         });
     }
     return user;
 });
+const updateProfile = (userId, payload) => __awaiter(void 0, void 0, void 0, function* () {
+    const user = yield user_model_1.User.findById(userId);
+    if (!user) {
+        throw new AppError_1.default(http_status_codes_1.default.NOT_FOUND, "User not found");
+    }
+    const { name, phone, vehicleInfo } = payload;
+    if (name)
+        user.name = name;
+    if (phone)
+        user.phone = phone;
+    yield user.save();
+    //   If  user is a driver
+    if (user.role === "driver" && vehicleInfo) {
+        yield driver_model_1.Driver.findOneAndUpdate({ userId: user._id }, {
+            $set: {
+                "vehicleInfo.model": vehicleInfo.model,
+                "vehicleInfo.licensePlate": vehicleInfo.licensePlate,
+            },
+        }, { new: true });
+    }
+    return user;
+});
+const getMe = (userId) => __awaiter(void 0, void 0, void 0, function* () {
+    const user = yield user_model_1.User.findById(userId).select("-password");
+    return {
+        data: user,
+    };
+});
+// const getAllUsers = async () => {
+//   const users = await User.find({}).select("-password").populate("driver", "name vehicleInfo");
+//   const totalUsers = await User.countDocuments();
+//   return {
+//     data: users,
+//     meta: {
+//       total: totalUsers,
+//     },
+//   };
+// };
 const getAllUsers = () => __awaiter(void 0, void 0, void 0, function* () {
-    const users = yield user_model_1.User.find({});
+    const users = yield user_model_1.User.aggregate([
+        {
+            $lookup: {
+                from: "drivers",
+                localField: "_id",
+                foreignField: "userId",
+                as: "driverData",
+            },
+        },
+        {
+            $addFields: {
+                isApproved: { $arrayElemAt: ["$driverData.isApproved", 0] },
+            },
+        },
+        {
+            $project: {
+                password: 0,
+                driverData: 0,
+            },
+        },
+    ]);
     const totalUsers = yield user_model_1.User.countDocuments();
     return {
         data: users,
-        meta: {
-            total: totalUsers,
-        },
+        meta: { total: totalUsers },
     };
 });
 const approveDriver = (params) => __awaiter(void 0, void 0, void 0, function* () {
     const { driverId } = params;
-    const driver = yield driver_model_1.Driver.findByIdAndUpdate(driverId, { isApproved: true }, { new: true });
+    const driver = yield driver_model_1.Driver.findOneAndUpdate({ userId: driverId }, {
+        $set: {
+            isApproved: true,
+        },
+    }, {
+        new: true,
+    });
     if (!driver) {
         throw new Error("Driver not found");
     }
@@ -78,7 +141,13 @@ const approveDriver = (params) => __awaiter(void 0, void 0, void 0, function* ()
 });
 const suspendDriver = (params) => __awaiter(void 0, void 0, void 0, function* () {
     const { driverId } = params;
-    const driver = yield driver_model_1.Driver.findByIdAndUpdate(driverId, { isApproved: false }, { new: true });
+    const driver = yield driver_model_1.Driver.findOneAndUpdate({ userId: driverId }, {
+        $set: {
+            isApproved: false,
+        },
+    }, {
+        new: true,
+    });
     if (!driver) {
         throw new Error("Driver not found");
     }
@@ -102,9 +171,11 @@ const unBlockUser = (params) => __awaiter(void 0, void 0, void 0, function* () {
 });
 exports.UserService = {
     createUser,
+    getMe,
     getAllUsers,
     approveDriver,
     suspendDriver,
     blockUser,
-    unBlockUser
+    unBlockUser,
+    updateProfile,
 };

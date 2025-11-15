@@ -61,6 +61,12 @@ const DriverSchema = new mongoose_1.Schema({
         type: Number,
         default: 0,
     },
+    earningsHistory: [
+        {
+            date: { type: Date },
+            fare: { type: Number },
+        },
+    ],
 }, {
     timestamps: true,
     versionKey: false,

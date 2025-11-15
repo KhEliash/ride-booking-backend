@@ -36,6 +36,16 @@ const acceptRide = (0, catchAsync_1.catchAsync)((req, res, next) => __awaiter(vo
         data: result,
     });
 }));
+const getCurrentRide = (0, catchAsync_1.catchAsync)((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const decodeToken = req.user;
+    const result = yield ride_service_1.RideService.getCurrentRide(decodeToken.userId);
+    (0, sendResponse_1.sendResponse)(res, {
+        statusCode: http_status_codes_1.default.CREATED,
+        success: true,
+        message: "Get Current Ride Successfully",
+        data: result,
+    });
+}));
 const updateStatus = (0, catchAsync_1.catchAsync)((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const decodeToken = req.user;
     const result = yield ride_service_1.RideService.updateRideStatus(req.params, decodeToken.userId, req.body);
@@ -85,6 +95,16 @@ const getAvailableRides = (0, catchAsync_1.catchAsync)((req, res, next) => __awa
         data: result,
     });
 }));
+const getRideById = (0, catchAsync_1.catchAsync)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { id } = req.params;
+    const ride = yield ride_service_1.RideService.getRideById(id);
+    (0, sendResponse_1.sendResponse)(res, {
+        statusCode: http_status_codes_1.default.OK,
+        success: true,
+        message: "Ride details get successfully",
+        data: ride,
+    });
+}));
 const getAllRides = (0, catchAsync_1.catchAsync)((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield ride_service_1.RideService.getAllRides();
     (0, sendResponse_1.sendResponse)(res, {
@@ -102,5 +122,7 @@ exports.RideController = {
     getRiderHistory,
     getDriverHistory,
     getAvailableRides,
-    getAllRides
+    getRideById,
+    getCurrentRide,
+    getAllRides,
 };

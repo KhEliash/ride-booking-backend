@@ -19,11 +19,15 @@ const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const user_model_1 = require("../user/user.model");
 const env_1 = require("../../config/env");
-const credentialLogin = (payload) => __awaiter(void 0, void 0, void 0, function* () {
+const setCookie_1 = require("../../utils/setCookie");
+const credentialLogin = (res, payload) => __awaiter(void 0, void 0, void 0, function* () {
     const { email, password } = payload;
     const isUserExist = yield user_model_1.User.findOne({ email });
     if (!isUserExist) {
         throw new AppError_1.default(http_status_codes_1.default.BAD_REQUEST, "User Does Not Exist");
+    }
+    if (isUserExist.isBlocked === true) {
+        throw new AppError_1.default(http_status_codes_1.default.BAD_REQUEST, "User is blocked by admin");
     }
     const isPasswordMatch = yield bcryptjs_1.default.compare(password, isUserExist.password);
     if (!isPasswordMatch) {
@@ -37,6 +41,7 @@ const credentialLogin = (payload) => __awaiter(void 0, void 0, void 0, function*
     const accessToken = jsonwebtoken_1.default.sign(jwtPayload, env_1.envVars.JWT_ACCESS_SECRET, {
         expiresIn: env_1.envVars.JWT_ACCESS_EXPIRES,
     });
+    (0, setCookie_1.setCookie)(res, accessToken);
     return {
         accessToken,
     };

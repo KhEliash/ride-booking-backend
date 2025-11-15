@@ -26,6 +26,26 @@ const createUser = (0, catchAsync_1.catchAsync)((req, res, next) => __awaiter(vo
         data: user,
     });
 }));
+const updateProfile = (0, catchAsync_1.catchAsync)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const userId = req.user.userId;
+    const updatedUser = yield user_service_1.UserService.updateProfile(userId, req.body);
+    (0, sendResponse_1.sendResponse)(res, {
+        statusCode: http_status_codes_1.default.OK,
+        success: true,
+        message: "Profile updated successfully",
+        data: updatedUser,
+    });
+}));
+const getMe = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const decodedToken = req.user;
+    const result = yield user_service_1.UserService.getMe(decodedToken.userId);
+    (0, sendResponse_1.sendResponse)(res, {
+        success: true,
+        statusCode: http_status_codes_1.default.CREATED,
+        message: "Profile Retrieved Successfully",
+        data: result.data,
+    });
+});
 const getAllUsers = (0, catchAsync_1.catchAsync)((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield user_service_1.UserService.getAllUsers();
     (0, sendResponse_1.sendResponse)(res, {
@@ -74,9 +94,11 @@ const unBlockUser = (0, catchAsync_1.catchAsync)((req, res, next) => __awaiter(v
 }));
 exports.UserController = {
     createUser,
+    getMe,
     getAllUsers,
     approveDriver,
     suspendDriver,
     blockUser,
-    unBlockUser
+    unBlockUser,
+    updateProfile
 };

@@ -45,7 +45,9 @@ const getProfile = (driverId) => __awaiter(void 0, void 0, void 0, function* () 
     return driver;
 });
 const getAllDrivers = () => __awaiter(void 0, void 0, void 0, function* () {
-    return yield driver_model_1.Driver.find().sort({ createdAt: -1 }).populate("userId");
+    return yield driver_model_1.Driver.find()
+        .sort({ createdAt: -1 })
+        .populate("userId", "-password");
 });
 exports.DriverService = {
     setAvailability,

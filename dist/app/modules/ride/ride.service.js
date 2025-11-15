@@ -88,6 +88,14 @@ const acceptRide = (params, driverId) => __awaiter(void 0, void 0, void 0, funct
         { path: "driverId", select: "name phone vehicleInfo" },
     ]);
 });
+const getCurrentRide = (driverId) => __awaiter(void 0, void 0, void 0, function* () {
+    const activeStatuses = ["accepted", "picked_up", "in_transit"];
+    const ride = yield ride_model_1.Ride.findOne({
+        driverId: driverId,
+        status: { $in: activeStatuses },
+    }).sort({ updatedAt: -1 });
+    return ride;
+});
 const updateRideStatus = (params, driverId, payload) => __awaiter(void 0, void 0, void 0, function* () {
     var _a;
     const { rideId } = params;
@@ -116,10 +124,16 @@ const updateRideStatus = (params, driverId, payload) => __awaiter(void 0, void 0
         }
         case "completed": {
             ride.completedAt = new Date();
-            // Update driver earnings and clear current ride
-            const driver = yield driver_model_1.Driver.findById(driverId);
+            const driver = yield driver_model_1.Driver.findOne({ userId: driverId });
             if (driver && ride.fare) {
+                // Increment total earnings
                 driver.earnings += ride.fare;
+                // Append to earnings history
+                driver.earningsHistory.push({
+                    date: new Date(),
+                    fare: ride.fare,
+                });
+                // Clear current ride
                 driver.currentRideId = "";
                 yield driver.save();
             }
@@ -158,7 +172,7 @@ const getRiderHistory = (riderId) => __awaiter(void 0, void 0, void 0, function*
         .sort({ createdAt: -1 });
 });
 const getDriverHistory = (driverId) => __awaiter(void 0, void 0, void 0, function* () {
-    return yield ride_model_1.Ride.find({ driverId, status: "completed" })
+    return yield ride_model_1.Ride.find({ driverId })
         .populate("riderId", "name phone")
         .sort({ createdAt: -1 });
 });
@@ -167,11 +181,38 @@ const getAvailableRides = () => __awaiter(void 0, void 0, void 0, function* () {
         .populate("riderId", "name phone")
         .sort({ requestedAt: 1 });
 });
+// const getAllRides = async () => {
+//   return await Ride.find()
+//     .populate("riderId", "name email phone")
+//     .populate("driverId", "name vehicleInfo")
+//     .sort({ createdAt: -1 });
+// };
 const getAllRides = () => __awaiter(void 0, void 0, void 0, function* () {
     return yield ride_model_1.Ride.find()
         .populate("riderId", "name email phone")
-        .populate("driverId", "name email phone vehicleInfo")
+        .populate({
+        path: "driverId",
+        select: "vehicleInfo",
+        populate: {
+            path: "_id",
+            model: "User",
+            select: "name email phone",
+        },
+    })
         .sort({ createdAt: -1 });
+});
+const getRideById = (rideId) => __awaiter(void 0, void 0, void 0, function* () {
+    const rideDoc = yield ride_model_1.Ride.findById(rideId);
+    if (!rideDoc)
+        throw new AppError_1.default(http_status_codes_1.default.NOT_FOUND, "Ride not found");
+    const ride = rideDoc.toObject();
+    // Get driver info
+    const driver = yield driver_model_1.Driver.findOne({ userId: ride.driverId }).select("vehicleInfo userId");
+    if (driver) {
+        const user = yield user_model_1.User.findById(driver.userId).select("name");
+        ride.driverInfo = Object.assign(Object.assign({}, driver.toObject()), { name: (user === null || user === void 0 ? void 0 : user.name) || null });
+    }
+    return ride;
 });
 exports.RideService = {
     rideCreate,
@@ -180,6 +221,8 @@ exports.RideService = {
     cancelRide,
     getRiderHistory,
     getDriverHistory,
+    getRideById,
     getAvailableRides,
+    getCurrentRide,
     getAllRides,
 };
