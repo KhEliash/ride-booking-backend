@@ -17,7 +17,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{ \r\n    \"email\": \"elias@gmail.com\",\r\n    \"password\": \"shdhs\"\r\n }",
+							"raw": "{ \r\n    \"email\": \"driver@gmail.com\",\r\n    \"password\": \"123456\"\r\n }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -40,6 +40,28 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "logout",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/v1/auth/logout",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"logout"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -53,7 +75,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Siam\",\r\n    \"email\": \"siam@gmail.com\",\r\n    \"password\": \"shdhs\",\r\n    \"role\": \"rider\",\r\n    \"vehicleInfo\": {\r\n        \"model\": \"Toyota Prius\",\r\n        \"licensePlate\": \"ABC-1234\"\r\n    }\r\n}",
+							"raw": "{\r\n    \"name\": \"Admin\",\r\n    \"email\": \"admin@gmail.com\",\r\n    \"password\": \"123456\",\r\n    \"role\": \"admin\",\r\n    \"vehicleInfo\": {\r\n        \"model\": \"Toyota Prius\",\r\n        \"licensePlate\": \"ABC-1234\"\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -100,6 +122,34 @@
 								"v1",
 								"user",
 								"all-users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getME",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGU1MmNkYTdmZWRlYWM2YjdjMzUwZWEiLCJlbWFpbCI6ImVsaWFzQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc2MTMxNzg2NiwiZXhwIjoxNzYxOTIyNjY2fQ.WjzJpuNhZl4DE12ETld2NnetcS7lQHO8_7Ls4epqAEk",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/api/v1/user/me",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"me"
 							]
 						}
 					},
@@ -193,7 +243,7 @@
 					"response": []
 				},
 				{
-					"name": "block user Copy",
+					"name": "unblock user",
 					"request": {
 						"method": "PATCH",
 						"header": [
@@ -220,6 +270,43 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "update profile",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTA5ZmE0OTFjOTNjNTZlZTQ2MWFjODUiLCJlbWFpbCI6InJpZGVyM0BnbWFpbC5jb20iLCJyb2xlIjoicmlkZXIiLCJpYXQiOjE3NjMwODc5ODMsImV4cCI6MTc2MzY5Mjc4M30.quL-Cwd6DjMOjcFcilujlzwwIY1WBZcIaMVdh9F7U0c",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "// {\r\n//   \"name\": \"Rider3 Updated\",\r\n//   \"email\": \"rider3@gmail.com\",\r\n//   \"phone\": \"01710000000\"\r\n// }\r\n\r\n\r\n{\r\n  \"name\": \"Driver Updated\",\r\n  \"email\": \"driver4@gmail.com\",\r\n  \"phone\": \"01720000000\",\r\n  \"vehicleInfo\": {\r\n    \"model\": \"Honda Civic\",\r\n    \"licensePlate\": \"XYZ-7777\"\r\n  }\r\n}\r\n\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/user/update-profile",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"update-profile"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -233,7 +320,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGU0MjVmZjZmNzQzNGJjMGVhZmFkZmMiLCJlbWFpbCI6InNpYW1AZ21haWwuY29tIiwicm9sZSI6InJpZGVyIiwiaWF0IjoxNzU5Nzg0NzEyLCJleHAiOjE3NjAzODk1MTJ9.jDQlwGHDTPmTWcJ6P1wNFV4GruhE7Y6Uz7_LkzCeVbs",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGZlMjUyNjhkN2ZiZmU0YTRiNmRhZjEiLCJlbWFpbCI6InJpZGVyQGdtYWlsLmNvbSIsInJvbGUiOiJyaWRlciIsImlhdCI6MTc2MTcyMjk2NywiZXhwIjoxNzYyMzI3NzY3fQ.JoajYzv_b88AL-INETqX5opSE50slTGJB4cv2qBdi1o",
 								"type": "text"
 							}
 						],
@@ -270,12 +357,12 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGU0MmVhNzAyYzRkMWRjYTBmNjAyZjYiLCJlbWFpbCI6ImtvbW9sQGdtYWlsLmNvbSIsInJvbGUiOiJkcml2ZXIiLCJpYXQiOjE3NTk4MjMyMzAsImV4cCI6MTc2MDQyODAzMH0.GLkZUCrNJH1ZA7484_rvniFhjz3FcTfBZJGTSfZM67c",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGZlMjQ5MDhkN2ZiZmU0YTRiNmRhZWIiLCJlbWFpbCI6ImRyaXZlckBnbWFpbC5jb20iLCJyb2xlIjoiZHJpdmVyIiwiaWF0IjoxNzYxNjcxNDE0LCJleHAiOjE3NjIyNzYyMTR9._zB0Ur7GEpejPGwSRXV7Kq3IQRQHouZCgoQkSZ7WFIM",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "http://localhost:5000/api/v1/ride/accept-ride/68e4d712049d02e5a44391e9",
+							"raw": "http://localhost:5000/api/v1/ride/accept-ride/6900f74ce26fe9824911cb1c",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -286,7 +373,7 @@
 								"v1",
 								"ride",
 								"accept-ride",
-								"68e4d712049d02e5a44391e9"
+								"6900f74ce26fe9824911cb1c"
 							]
 						}
 					},
@@ -299,7 +386,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGU0MmVhNzAyYzRkMWRjYTBmNjAyZjYiLCJlbWFpbCI6ImtvbW9sQGdtYWlsLmNvbSIsInJvbGUiOiJkcml2ZXIiLCJpYXQiOjE3NTk4MjMyMzAsImV4cCI6MTc2MDQyODAzMH0.GLkZUCrNJH1ZA7484_rvniFhjz3FcTfBZJGTSfZM67c",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGZlMjQ5MDhkN2ZiZmU0YTRiNmRhZWIiLCJlbWFpbCI6ImRyaXZlckBnbWFpbC5jb20iLCJyb2xlIjoiZHJpdmVyIiwiaWF0IjoxNzYyMjYyMDg2LCJleHAiOjE3NjI4NjY4ODZ9.mI_-ayEyXVZaKovYu3hZVXakH16M19EZMQ7MjFGNEpc",
 								"type": "text"
 							}
 						],
@@ -313,7 +400,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:5000/api/v1/ride/update-ride-status/68e4d712049d02e5a44391e9",
+							"raw": "http://localhost:5000/api/v1/ride/update-ride-status/6909fa6e1c93c56ee461ac8c",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -324,7 +411,7 @@
 								"v1",
 								"ride",
 								"update-ride-status",
-								"68e4d712049d02e5a44391e9"
+								"6909fa6e1c93c56ee461ac8c"
 							]
 						}
 					},
@@ -373,7 +460,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGU0MjVmZjZmNzQzNGJjMGVhZmFkZmMiLCJlbWFpbCI6InNpYW1AZ21haWwuY29tIiwicm9sZSI6InJpZGVyIiwiaWF0IjoxNzU5Nzg0NzEyLCJleHAiOjE3NjAzODk1MTJ9.jDQlwGHDTPmTWcJ6P1wNFV4GruhE7Y6Uz7_LkzCeVbs",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGZlMjUyNjhkN2ZiZmU0YTRiNmRhZjEiLCJlbWFpbCI6InJpZGVyQGdtYWlsLmNvbSIsInJvbGUiOiJyaWRlciIsImlhdCI6MTc2MjI4NDgwMywiZXhwIjoxNzYyODg5NjAzfQ.RZbSHP6eKwQqdPcQ6U-48GqPRvHkcsepZ4g_LqlD7gE",
 								"type": "text"
 							}
 						],
@@ -401,7 +488,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGU0MmVhNzAyYzRkMWRjYTBmNjAyZjYiLCJlbWFpbCI6ImtvbW9sQGdtYWlsLmNvbSIsInJvbGUiOiJkcml2ZXIiLCJpYXQiOjE3NTk4MjMyMzAsImV4cCI6MTc2MDQyODAzMH0.GLkZUCrNJH1ZA7484_rvniFhjz3FcTfBZJGTSfZM67c",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGZlMjQ5MDhkN2ZiZmU0YTRiNmRhZWIiLCJlbWFpbCI6ImRyaXZlckBnbWFpbC5jb20iLCJyb2xlIjoiZHJpdmVyIiwiaWF0IjoxNzYxNzMyODMyLCJleHAiOjE3NjIzMzc2MzJ9.OhlSxkieS7B-2GcNiVgNhbojNY-zYBNHw82DDwKrkqA",
 								"type": "text"
 							}
 						],
@@ -423,13 +510,13 @@
 					"response": []
 				},
 				{
-					"name": "vailable rides",
+					"name": "available rides",
 					"request": {
 						"method": "GET",
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGU0MmVhNzAyYzRkMWRjYTBmNjAyZjYiLCJlbWFpbCI6ImtvbW9sQGdtYWlsLmNvbSIsInJvbGUiOiJkcml2ZXIiLCJpYXQiOjE3NTk4MjMyMzAsImV4cCI6MTc2MDQyODAzMH0.GLkZUCrNJH1ZA7484_rvniFhjz3FcTfBZJGTSfZM67c",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGZlMjQ5MDhkN2ZiZmU0YTRiNmRhZWIiLCJlbWFpbCI6ImRyaXZlckBnbWFpbC5jb20iLCJyb2xlIjoiZHJpdmVyIiwiaWF0IjoxNzYxNzE4MTI2LCJleHAiOjE3NjIzMjI5MjZ9.oHWKALCHN8sXLQe4RdcNGEj-YRg3QHE2SKEpYLztl2s",
 								"type": "text"
 							}
 						],
@@ -457,7 +544,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGU0MjYxZDZmNzQzNGJjMGVhZmFlMDAiLCJlbWFpbCI6ImVsaWFzQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc1OTgzMTI1MywiZXhwIjoxNzYwNDM2MDUzfQ.m7U5yawEYR15rcJ29v4pC1d04kMPHPIVnrUi3XcEG1U",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGZlMjUyNjhkN2ZiZmU0YTRiNmRhZjEiLCJlbWFpbCI6InJpZGVyQGdtYWlsLmNvbSIsInJvbGUiOiJyaWRlciIsImlhdCI6MTc2MTYzNTA0NCwiZXhwIjoxNzYyMjM5ODQ0fQ.ZhzeJ5DgLMHILAckGecVYss-6ITSOOl1HQ2h_6WyhSk",
 								"type": "text"
 							}
 						],
@@ -477,6 +564,34 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "get ride by id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGZlMjYwYThkN2ZiZmU0YTRiNmRhZjgiLCJlbWFpbCI6InJpZGVyMkBnbWFpbC5jb20iLCJyb2xlIjoicmlkZXIiLCJpYXQiOjE3NjE2NzQ4MjksImV4cCI6MTc2MjI3OTYyOX0.wez6fyPoDKYwQmZbAs4DkrKohM6yIDMdhqJJ1Q-EYmA",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/api/v1/ride/6900f74ce26fe9824911cb1c",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"ride",
+								"6900f74ce26fe9824911cb1c"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -490,13 +605,13 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGU0MmVhNzAyYzRkMWRjYTBmNjAyZjYiLCJlbWFpbCI6ImtvbW9sQGdtYWlsLmNvbSIsInJvbGUiOiJkcml2ZXIiLCJpYXQiOjE3NTk4NDExMzksImV4cCI6MTc2MDQ0NTkzOX0.7cfC2AzMEAjEZZ25poiKVqiXhronhSAPwJPvK7IpKaE",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGZlMjQ5MDhkN2ZiZmU0YTRiNmRhZWIiLCJlbWFpbCI6ImRyaXZlckBnbWFpbC5jb20iLCJyb2xlIjoiZHJpdmVyIiwiaWF0IjoxNzYyMTg5NzA2LCJleHAiOjE3NjI3OTQ1MDZ9.y4cDml9PSP-TR_YvI_Vknj5JWIMOlfoWRTTChkY9Soo",
 								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"isOnline\": \"true\"\r\n}",
+							"raw": "{\r\n    \"isOnline\": \"false\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -527,7 +642,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGU0MmVhNzAyYzRkMWRjYTBmNjAyZjYiLCJlbWFpbCI6ImtvbW9sQGdtYWlsLmNvbSIsInJvbGUiOiJkcml2ZXIiLCJpYXQiOjE3NTk4NDExMzksImV4cCI6MTc2MDQ0NTkzOX0.7cfC2AzMEAjEZZ25poiKVqiXhronhSAPwJPvK7IpKaE",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGZlMjQ5MDhkN2ZiZmU0YTRiNmRhZWIiLCJlbWFpbCI6ImRyaXZlckBnbWFpbC5jb20iLCJyb2xlIjoiZHJpdmVyIiwiaWF0IjoxNzYxNzMyODMyLCJleHAiOjE3NjIzMzc2MzJ9.OhlSxkieS7B-2GcNiVgNhbojNY-zYBNHw82DDwKrkqA",
 								"type": "text"
 							}
 						],
@@ -549,13 +664,41 @@
 					"response": []
 				},
 				{
-					"name": "profile",
+					"name": "current ride",
 					"request": {
 						"method": "GET",
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGU0MmVhNzAyYzRkMWRjYTBmNjAyZjYiLCJlbWFpbCI6ImtvbW9sQGdtYWlsLmNvbSIsInJvbGUiOiJkcml2ZXIiLCJpYXQiOjE3NTk4NDExMzksImV4cCI6MTc2MDQ0NTkzOX0.7cfC2AzMEAjEZZ25poiKVqiXhronhSAPwJPvK7IpKaE",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGZlMjQ5MDhkN2ZiZmU0YTRiNmRhZWIiLCJlbWFpbCI6ImRyaXZlckBnbWFpbC5jb20iLCJyb2xlIjoiZHJpdmVyIiwiaWF0IjoxNzYxNzMyODMyLCJleHAiOjE3NjIzMzc2MzJ9.OhlSxkieS7B-2GcNiVgNhbojNY-zYBNHw82DDwKrkqA",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/api/v1/ride/current-ride",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"ride",
+								"current-ride"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "driver profile",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGZlMjQ5MDhkN2ZiZmU0YTRiNmRhZWIiLCJlbWFpbCI6ImRyaXZlckBnbWFpbC5jb20iLCJyb2xlIjoiZHJpdmVyIiwiaWF0IjoxNzYxNzU4MDg1LCJleHAiOjE3NjIzNjI4ODV9.bx0WZDSXKmpx2jVAKEQg8C6Y_nJ4g8Gqpr1XMvyx_h0",
 								"type": "text"
 							}
 						],
