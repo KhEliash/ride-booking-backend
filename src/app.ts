@@ -6,7 +6,7 @@ import { globalErrorHandler } from "./app/middlewares/globalErrHandlers";
 import { notFound } from "./app/middlewares/notFound";
 
 const app = express();
-app.set("trust proxy", 1);
+
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
